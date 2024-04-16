@@ -11,6 +11,9 @@ public class RomanNumberTransformer implements NumberTransformer {
             throw new IllegalArgumentException("Zahl nicht im Wertebereich zwischen 1 und 3000");
         }
 
+        //if (!(Integer.class.isInstance(number))){
+          //  throw new IllegalArgumentException("Zahl ist kein Integer");
+        //}
         String[] romanSymbols = {"I", "IV", "V", "IX", "X", "XL",
                 "L", "XC", "C", "CD", "D", "CM", "M"};
         int[] romanValues = {1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000};
