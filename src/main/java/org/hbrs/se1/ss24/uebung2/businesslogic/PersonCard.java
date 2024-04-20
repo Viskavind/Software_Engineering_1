@@ -1,4 +1,4 @@
-package org.hbrs.se1.ss24.uebung2;
+package org.hbrs.se1.ss24.uebung2.businesslogic;
 
 public interface PersonCard {
     public String getFirstName();
