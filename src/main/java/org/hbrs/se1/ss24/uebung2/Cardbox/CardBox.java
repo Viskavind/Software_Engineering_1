@@ -1,14 +1,14 @@
 package org.hbrs.se1.ss24.uebung2.Cardbox;
-import org.hbrs.se1.ss24.uebung2.businesslogic.PersonCardAbstract;
+import org.hbrs.se1.ss24.uebung2.businesslogic.PersonCard;
 
 import java.util.ArrayList;
 
 public class CardBox {
 
-    private final ArrayList<PersonCardAbstract> cardBox = new ArrayList<>();
+    private final ArrayList<PersonCard> cardBox = new ArrayList<>();
 
-    public void addPersonCard(PersonCardAbstract card) throws CardBoxException {
-        for (PersonCardAbstract existingCard : cardBox) {
+    public void addPersonCard(PersonCard card) throws CardBoxException {
+        for (PersonCard existingCard : cardBox) {
             if (existingCard.getId() == card.getId()) {
                 throw new CardBoxException("Das CardBox-Objekt mit der ID " + card.getId() + " ist bereits vorhanden");
             }
@@ -17,7 +17,7 @@ public class CardBox {
     }
 
     public String deletePersonCard(int id){
-        for (PersonCardAbstract card : cardBox) {
+        for (PersonCard card : cardBox) {
             if (card.getId() == id) {
                 cardBox.remove(card);
                 return "Das CardBox-Objekt mit der ID " + id + " wurde erfolgreich gelöscht";
@@ -27,7 +27,7 @@ public class CardBox {
     }
 
     public void showContent(){
-        for (PersonCardAbstract card : cardBox) {
+        for (PersonCard card : cardBox) {
             System.out.println(card.toString());
         }
     }
