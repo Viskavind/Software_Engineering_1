@@ -11,7 +11,7 @@ public class EndUserCard extends PersonCardAbstract{
 
     @Override
     public String toString() {
-        return super.toString() + ", isHungry=" + isHungry + "]";
+        return super.toString() + ", isHungry=[" + isHungry + "]";
     }
 
 

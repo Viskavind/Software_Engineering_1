@@ -26,6 +26,6 @@ public abstract class PersonCardAbstract implements PersonCard{
 
     @Override
     public String toString() {
-        return "PersonCard [firstName=" + firstName + ", id=" + id + ", lastName=" + lastName + "]";
+        return "ID= [" + id  + "], Vorname= [" + firstName + "], Nachname= ["+ lastName + "]";
     }
 }

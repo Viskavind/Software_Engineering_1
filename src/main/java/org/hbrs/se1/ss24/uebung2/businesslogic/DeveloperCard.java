@@ -11,6 +11,6 @@ public class DeveloperCard extends PersonCardAbstract{
 
     @Override
     public String toString() {
-        return super.toString() + ", hasEnoughCoffee=" + hasEnoughCoffee + "]";
+        return super.toString() + ", hasEnoughCoffee=[" + hasEnoughCoffee + "]";
     }
 }

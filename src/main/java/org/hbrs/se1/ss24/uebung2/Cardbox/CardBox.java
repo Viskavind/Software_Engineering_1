@@ -3,6 +3,8 @@ import org.hbrs.se1.ss24.uebung2.businesslogic.PersonCard;
 
 import java.util.ArrayList;
 
+
+//Class that can store Objects of the type PersonCard
 public class CardBox {
 
     private final ArrayList<PersonCard> cardBox = new ArrayList<>();
@@ -23,6 +25,8 @@ public class CardBox {
                 return "Das CardBox-Objekt mit der ID " + id + " wurde erfolgreich gelöscht";
             }
         }
+        //Das Problem hierbei ist, dass falls dieses Objekt existiert aber wegen eines Fehlers im Code übersprungen wird,
+        // wird dieser Fehler ignoriert und es gibt keine Fehlermeldung
         return "Das CardBox-Objekt mit der ID " + id + " konnte nicht gefunden werden";
     }
 
@@ -34,5 +38,9 @@ public class CardBox {
 
     public int size(){
         return cardBox.size();
+    }
+
+    public PersonCard getPersonCard(int pos){
+            return cardBox.get(pos);
     }
 }
