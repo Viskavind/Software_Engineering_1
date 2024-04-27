@@ -40,10 +40,8 @@ public enum CardBox {
         return "Das CardBox-Objekt mit der ID " + id + " konnte nicht gefunden werden";
     }
 
-    public void showContent(){
-        for (PersonCard card : cardBox) {
-            System.out.println(card.toString());
-        }
+    public ArrayList<PersonCard> getCurrentList(){
+        return cardBox;
     }
 
     public int size(){
