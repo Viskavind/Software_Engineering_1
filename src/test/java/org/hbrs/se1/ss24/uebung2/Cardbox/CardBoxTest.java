@@ -8,12 +8,13 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CardBoxTest {
 
-    public CardBox cardBox = new CardBox();
+    CardBox cardBox = CardBox.getInstance();
     EndUserCard userJohn = new EndUserCard("John", "Doe", true);
     DeveloperCard developerJane = new DeveloperCard("Jane", "Dau", false);
     EndUserCard userMary = new EndUserCard("Mary", "Smith", false);

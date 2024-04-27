@@ -1,13 +1,23 @@
 package org.hbrs.se1.ss24.uebung2.Cardbox;
 import org.hbrs.se1.ss24.uebung2.businesslogic.PersonCard;
-
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 
 //Class that can store Objects of the type PersonCard
 public class CardBox {
 
+    //Das Singleton Pattern wird angewendet um nur ein erstellbares CardBox Objekt zu erzeugen,
+    // von diesem wird dann die Instanz über getInstance abgerufen.
     private final ArrayList<PersonCard> cardBox = new ArrayList<>();
+    private static final CardBox cardBoxInstance = new CardBox();
+
+    private CardBox(){};
+
+    public static CardBox getInstance(){
+        return cardBoxInstance;
+    }
 
     public void addPersonCard(PersonCard card) throws CardBoxException {
         for (PersonCard existingCard : cardBox) {
@@ -42,5 +52,13 @@ public class CardBox {
 
     public PersonCard getPersonCard(int pos){
             return cardBox.get(pos);
+    }
+
+    public void save() {
+
+    }
+
+    public void load() {
+
     }
 }
