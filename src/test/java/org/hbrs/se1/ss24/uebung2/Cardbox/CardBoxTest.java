@@ -73,7 +73,7 @@ class CardBoxTest {
         // Test if the card is deleted from the cardBox
 
         // Delete non-existent User
-        assertEquals("Das CardBox-Objekt mit der ID " + 191919 + "konnte nicht gefunden werden", cardBox.deletePersonCard(191919));
+        assertEquals("Das CardBox-Objekt mit der ID " + 191919 + " konnte nicht gefunden werden", cardBox.deletePersonCard(191919));
 
         // Delete exising User
         assertEquals(2, cardBox.size());
