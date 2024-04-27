@@ -1,6 +1,7 @@
 package org.hbrs.se1.ss24.uebung2.Cardbox;
 import org.hbrs.se1.ss24.uebung2.businesslogic.PersonCard;
 
+import java.io.*;
 import java.util.ArrayList;
 
 
@@ -53,22 +54,29 @@ public enum CardBox {
         return cardBox.get(pos);
     }
 
-    /*
+
     public void save() throws IOException {
         FileOutputStream fos = new FileOutputStream(new File("Objects.txt"));
         ObjectOutputStream oos = new ObjectOutputStream(fos);
 
-       for(PersonCard card : cardBox){
-            oos.writeObject(cardBoxInstance.getPersonCard());
+       for(int i = 0;i< cardBox.size(); i++){
+           oos.writeObject(INSTANCE.getPersonCard(i));
         }
         oos.close();
         fos.close();
     }
 
    public void load() throws IOException, ClassNotFoundException {
+        while(!cardBox.isEmpty()){
+            cardBox.removeFirst();
+        }
+
         FileInputStream fis = new FileInputStream(new File("Objects.txt"));
         ObjectInputStream ois = new ObjectInputStream(fis);
 
-        cardBoxInstance = (CardBox) ois.readObject();
-    } */
+        while(fis.available()>0){
+            cardBox.add((PersonCard) ois.readObject());
+        }
+
+    }
 }
