@@ -4,8 +4,8 @@ public class DeveloperCard extends PersonCardAbstract{
 
     private final boolean hasEnoughCoffee;
 
-    public DeveloperCard(String firstName, String lastName, boolean hasEnoughCoffee) {
-        super(firstName, lastName);
+    public DeveloperCard(String firstName, String lastName,  int id, boolean hasEnoughCoffee) {
+        super(firstName, lastName, id);
         this.hasEnoughCoffee = hasEnoughCoffee;
     }
 
