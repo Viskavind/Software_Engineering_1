@@ -2,6 +2,7 @@ package org.hbrs.se1.ss24.uebung2.Cardbox;
 
 import org.hbrs.se1.ss24.uebung2.businesslogic.DeveloperCard;
 import org.hbrs.se1.ss24.uebung2.businesslogic.EndUserCard;
+import org.hbrs.se1.ss24.uebung2.businesslogic.PersonCard;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -83,7 +84,7 @@ class CardBoxTest {
 
     @Test
     void showContent() {
-        cardBox.showContent();
+        PersonCardView.showContent((ArrayList<PersonCard>) cardBox.getCurrentList());
         String expectedOutput = userJohn.toString() + System.lineSeparator() + developerJane.toString() + System.lineSeparator();
         assertEquals(expectedOutput, outContent.toString());
     }

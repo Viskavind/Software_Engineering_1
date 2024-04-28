@@ -3,17 +3,16 @@ import org.hbrs.se1.ss24.uebung2.businesslogic.PersonCard;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 
-//Class that can store Objects of the type PersonCard
+//Klasse die Objekte von PersonCard speichert und verwaltet
 public enum CardBox {
 
     //Das Singleton Pattern wird angewendet um nur ein erstellbares CardBox Objekt zu erzeugen,
     // von diesem wird dann die Instanz über getInstance abgerufen.
     INSTANCE;
     private final ArrayList<PersonCard> cardBox = new ArrayList<>();
-
-    private CardBox(){};
 
     public static CardBox getInstance(){
         return INSTANCE;
@@ -40,7 +39,7 @@ public enum CardBox {
         return "Das CardBox-Objekt mit der ID " + id + " konnte nicht gefunden werden";
     }
 
-    public ArrayList<PersonCard> getCurrentList(){
+    public List<PersonCard> getCurrentList(){
         return cardBox;
     }
 
@@ -53,28 +52,38 @@ public enum CardBox {
     }
 
 
-    public void save() throws IOException {
-        FileOutputStream fos = new FileOutputStream(new File("Objects.txt"));
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
+    public void save() throws CardboxStorageException {
+        try {
+            FileOutputStream fos = new FileOutputStream(new File("Objects.txt"));
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
 
-       for(int i = 0;i< cardBox.size(); i++){
-           oos.writeObject(INSTANCE.getPersonCard(i));
+            for (PersonCard card : cardBox) {
+                oos.writeObject(card);
+            }
+
+            oos.close();
+            fos.close();
+        } catch (IOException e) {
+            throw new CardboxStorageException("Fehler beim Speichern der CardBox", e);
         }
-        oos.close();
-        fos.close();
     }
 
-   public void load() throws IOException, ClassNotFoundException {
-        while(!cardBox.isEmpty()){
-            cardBox.removeFirst();
+    public void load() throws CardboxStorageException {
+        cardBox.clear();
+
+        try {
+            FileInputStream fis = new FileInputStream(new File("Objects.txt"));
+            ObjectInputStream ois = new ObjectInputStream(fis);
+
+            while (fis.available() > 0) {
+                PersonCard card = (PersonCard) ois.readObject();
+                cardBox.add(card);
+            }
+
+            ois.close();
+            fis.close();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new CardboxStorageException("Fehler beim Laden der CardBox", e);
         }
-
-        FileInputStream fis = new FileInputStream(new File("Objects.txt"));
-        ObjectInputStream ois = new ObjectInputStream(fis);
-
-        while(fis.available()>0){
-            cardBox.add((PersonCard) ois.readObject());
-        }
-
     }
 }
