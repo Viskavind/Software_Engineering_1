@@ -54,7 +54,8 @@ public enum CardBox {
 
     public void save() throws CardboxStorageException {
         try {
-            FileOutputStream fos = new FileOutputStream(new File("Objects.txt"));
+            File outputfile = new File("Objects.txt");
+            FileOutputStream fos = new FileOutputStream(outputfile);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
 
             for (PersonCard card : cardBox) {
@@ -72,7 +73,7 @@ public enum CardBox {
         cardBox.clear();
 
         try {
-            FileInputStream fis = new FileInputStream(new File("Objects.txt"));
+            FileInputStream fis = new FileInputStream("Objects.txt");
             ObjectInputStream ois = new ObjectInputStream(fis);
 
             while (fis.available() > 0) {

@@ -4,8 +4,8 @@ public class EndUserCard extends PersonCardAbstract{
 
     private final boolean isHungry;
 
-    public EndUserCard(String firstName, String lastName, boolean isHungry) {
-        super(firstName, lastName);
+    public EndUserCard(String firstName, String lastName, int id, boolean isHungry) {
+        super(firstName, lastName, id);
         this.isHungry = isHungry;
     }
 
