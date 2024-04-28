@@ -1,11 +1,9 @@
-package org.hbrs.se1.ss24.uebung2.Cardbox;
+package org.hbrs.se1.ss24.uebung3.Cardbox;
 
-import org.hbrs.se1.ss24.uebung2.Cardbox.PersonCardView;
-import org.hbrs.se1.ss24.uebung2.businesslogic.DeveloperCard;
-import org.hbrs.se1.ss24.uebung2.businesslogic.EndUserCard;
-import org.hbrs.se1.ss24.uebung2.businesslogic.PersonCard;
+import org.hbrs.se1.ss24.uebung3.businesslogic.DeveloperCard;
+import org.hbrs.se1.ss24.uebung3.businesslogic.EndUserCard;
+import org.hbrs.se1.ss24.uebung3.businesslogic.PersonCard;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Client {
@@ -24,20 +22,6 @@ public class Client {
         cardBox.addPersonCard(userMary);
         cardBox.addPersonCard(developerMary);
 
-
-        PersonCardView.showContent((ArrayList<PersonCard>) cardBox.getCurrentList());
-
-        try {
-            cardBox.save();
-        } catch (CardboxStorageException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
-            cardBox.load();
-        } catch (CardboxStorageException e) {
-            throw new RuntimeException(e);
-        }
 
         PersonCardView.showContent((ArrayList<PersonCard>) cardBox.getCurrentList());
 

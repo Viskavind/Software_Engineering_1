@@ -1,8 +1,7 @@
-package org.hbrs.se1.ss24.uebung2.Cardbox;
+package org.hbrs.se1.ss24.uebung3.Cardbox;
 
-import org.hbrs.se1.ss24.uebung2.businesslogic.PersonCard;
+import org.hbrs.se1.ss24.uebung3.businesslogic.PersonCard;
 import java.util.ArrayList;
-import java.util.List;
 
 public class PersonCardView {
 

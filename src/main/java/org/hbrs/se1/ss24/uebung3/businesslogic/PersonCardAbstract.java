@@ -1,4 +1,4 @@
-package org.hbrs.se1.ss24.uebung2.businesslogic;
+package org.hbrs.se1.ss24.uebung3.businesslogic;
 
 import java.io.Serializable;
 

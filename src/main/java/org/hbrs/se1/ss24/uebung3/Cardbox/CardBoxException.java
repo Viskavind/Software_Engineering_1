@@ -1,4 +1,4 @@
-package org.hbrs.se1.ss24.uebung2.Cardbox;
+package org.hbrs.se1.ss24.uebung3.Cardbox;
 
 public class CardBoxException extends Exception{
 
