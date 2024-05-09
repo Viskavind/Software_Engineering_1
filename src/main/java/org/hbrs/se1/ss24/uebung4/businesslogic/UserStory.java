@@ -10,12 +10,13 @@ public class UserStory {
     private String prio;
     private ArrayList<Task> tasks = new ArrayList<Task>();
 
-    public UserStory (String description, String prio, int id, ArrayList<Task> tasks) {
+    public UserStory (int id, String description, String prio) {
         this.description = description;
         this.prio = prio;
         this.id = "U"+id;
-        this.tasks = tasks;
     }
+
+    public String getId() {return id;}
 
     @Override
     public String toString() {

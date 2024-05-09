@@ -7,12 +7,33 @@ public class UserStoryStorage {
 
     private ArrayList<UserStory> userStories = new ArrayList<UserStory>();
 
+    public UserStoryStorage(){};
     public UserStoryStorage(ArrayList<UserStory> userStories) {
         this.userStories = userStories;
     }
 
     public void addUserStory(UserStory userStory) {
         userStories.add(userStory);
+    }
+
+    public UserStory getUserStory(int id) throws UserStoryException {
+        for (UserStory userStory : userStories) {
+            if(userStory.getId().equals("U"+id)) {
+                return userStory;
+            }
+            else{
+                throw new UserStoryException("UserStory existiert nicht");
+            }
+        }
+        return null;
+    }
+
+    public String toString(){
+        String str = "";
+        for(UserStory userStory : userStories){
+            str = str + "\n" + userStory.toString();
+        }
+        return str;
     }
 
     public void saveUserStories() throws UserStoryStorageException {
