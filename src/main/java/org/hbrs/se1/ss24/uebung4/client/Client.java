@@ -1,10 +1,8 @@
 package org.hbrs.se1.ss24.uebung4.client;
 
-import org.hbrs.se1.ss24.uebung4.businesslogic.Task;
-import org.hbrs.se1.ss24.uebung4.businesslogic.UserStory;
-import org.hbrs.se1.ss24.uebung4.businesslogic.UserStoryException;
-import org.hbrs.se1.ss24.uebung4.businesslogic.UserStoryStorage;
+import org.hbrs.se1.ss24.uebung4.businesslogic.*;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Client {
@@ -14,6 +12,7 @@ public class Client {
         UserStoryStorage storyStorage = new UserStoryStorage();
         UserStory story;
         Task task;
+        ArrayList<Task> taskList = new ArrayList<Task>();
         String description = "";
         int taskid = 0;
         int userid = 0;
@@ -24,12 +23,18 @@ public class Client {
 
             System.out.print("Enter command: ");
             String command = scanner.next();
-            if (command.equals("exit")){break;}
+
+            if (command.equals("exit")) {
+                break;
+            }
+
             if (command.equals("story")) {
-                userid = scanner.nextInt();
-                String[] tmp = scanner.nextLine().split(",");
-                description = tmp[0];
-                prio = tmp[1];
+                String line = scanner.nextLine().trim();
+                String[] parts = line.split(" ", 2);
+                userid = Integer.parseInt(parts[0]);
+                String[] descAndPrio = parts[1].split("\"", 3);
+                description = descAndPrio[1];
+                prio = descAndPrio[2].trim();
 
                 story = new UserStory(userid, description, prio);
                 storyStorage.addUserStory(story);
@@ -38,19 +43,49 @@ public class Client {
                 taskid = scanner.nextInt();
                 description = scanner.nextLine();
                 task = new Task(description, taskid);
+                taskList.add(task);
 
             }
             if (command.equals("assign")) {
-                userid = scanner.nextInt();
-                taskid = scanner.nextInt();
+                String line = scanner.nextLine().trim();
+                String[] parts = line.split(" ", 2);
+                String adduserstoryid = parts[0];
+                String addtaskid = parts[1];
+                for (Task t : taskList) {
+                    if (t.getId().equals(addtaskid)) {
+                        storyStorage.getUserStory(adduserstoryid).addTask(t);
+                    }
+                }
+
+                taskList.removeIf(t -> t.getId().equals(addtaskid));
 
             }
+
             if (command.equals("stories")) {
-                System.out.println(storyStorage.toString());
+                System.out.println(storyStorage);
             }
-            if (command.equals("tasks")) {}
-            if (command.equals("load")) {}
-            if (command.equals("save")) {}
+
+            if (command.equals("tasks")) {
+                for (Task t : taskList) {
+                    System.out.println(t.toString());
+                }
+            }
+
+            if (command.equals("load")) {
+                try {
+                    storyStorage.loadUserStories();
+                } catch (UserStoryStorageException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            if (command.equals("save")) {
+                try {
+                    storyStorage.saveUserStories();
+                } catch (UserStoryStorageException e) {
+                    throw new RuntimeException(e);
+
+                }
+            }
 
 
         }

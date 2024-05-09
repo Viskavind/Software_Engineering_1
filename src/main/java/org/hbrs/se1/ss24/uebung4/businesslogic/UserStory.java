@@ -1,9 +1,10 @@
 package org.hbrs.se1.ss24.uebung4.businesslogic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class UserStory {
+public class UserStory implements Serializable {
 
     private String id;
     private String description;

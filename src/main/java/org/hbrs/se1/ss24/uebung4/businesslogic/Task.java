@@ -1,9 +1,11 @@
 package org.hbrs.se1.ss24.uebung4.businesslogic;
 
-public class Task {
+import java.io.Serializable;
 
-    private String id;
-    private String description;
+public class Task implements Serializable {
+
+    private final String id;
+    private final String description;
 
     public Task (String description, int id){
         this.description = description;

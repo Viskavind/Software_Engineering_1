@@ -3,11 +3,14 @@ package org.hbrs.se1.ss24.uebung4.businesslogic;
 import java.io.*;
 import java.util.ArrayList;
 
-public class UserStoryStorage {
+public class UserStoryStorage implements Serializable{
 
-    private ArrayList<UserStory> userStories = new ArrayList<UserStory>();
+    private ArrayList<UserStory> userStories = new ArrayList<>();
 
-    public UserStoryStorage(){};
+    public UserStoryStorage(){
+
+    }
+
     public UserStoryStorage(ArrayList<UserStory> userStories) {
         this.userStories = userStories;
     }
@@ -16,9 +19,9 @@ public class UserStoryStorage {
         userStories.add(userStory);
     }
 
-    public UserStory getUserStory(int id) throws UserStoryException {
+    public UserStory getUserStory(String id) throws UserStoryException {
         for (UserStory userStory : userStories) {
-            if(userStory.getId().equals("U"+id)) {
+            if(userStory.getId().equals(id)) {
                 return userStory;
             }
             else{
@@ -47,6 +50,7 @@ public class UserStoryStorage {
 
             fos.close();
             oos.close();
+            userStories.clear();
         } catch (IOException e) {
             throw new UserStoryStorageException("Fehler beim Speichern der UserStories",e);
         }
