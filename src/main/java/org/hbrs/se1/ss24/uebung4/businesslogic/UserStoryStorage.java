@@ -7,36 +7,44 @@ public class UserStoryStorage implements Serializable{
 
     private final ArrayList<UserStory> userStories = new ArrayList<>();
 
+
     public UserStoryStorage(){
 
     }
 
 
-    public void addUserStory(UserStory userStory) throws UserStoryStorageException{
+    public int size(){
+        int size = 0;
+        for(UserStory userStory : userStories){
+            size++;
+        }
+        return size;
+    }
+
+    public String addUserStory(UserStory userStory) {
         for (UserStory existingUserStory : userStories) {
-            if (existingUserStory.getId().equals(userStory.getId())) {
-                throw new UserStoryStorageException("Das UserStory-Objekt mit der ID " + userStory.getId() + " ist bereits vorhanden");
+            if (existingUserStory.getId() == userStory.getId()) {
+                return "Die UserStory mit der Id:" + userStory.getId() +  " existiert bereits";
             }
         }
         userStories.add(userStory);
+        return "User Story wurde hinzugefügt";
     }
 
-    public UserStory getUserStory(String id) throws UserStoryException {
+    public UserStory getUserStory(int id){
         for (UserStory userStory : userStories) {
-            if(userStory.getId().equals(id)) {
+            if(userStory.getId() == id) {
                 return userStory;
             }
-            else{
-                throw new UserStoryException("UserStory existiert nicht");
-            }
         }
+        System.out.println("UserStory wurde nicht gefunden");
         return null;
     }
 
     public String toString(){
         StringBuilder str = new StringBuilder();
         for(UserStory userStory : userStories){
-            str.append("\n").append(userStory.toString());
+            str.append(userStory.toString()).append("\n");
         }
         return str.toString();
     }

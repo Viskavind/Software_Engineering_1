@@ -10,15 +10,18 @@ public class Client {
     public static void main(String[] args) throws UserStoryException {
 
         UserStoryStorage storyStorage = new UserStoryStorage();
+        TaskStorage taskStorage = new TaskStorage();
         UserStory story;
         Task task;
-        ArrayList<Task> taskList = new ArrayList<>();
         String description = "";
         int taskid = 0;
         int userid = 0;
         String prio = "";
 
+
         Scanner scanner = new Scanner(System.in);
+
+
         while (true){
 
             System.out.print("Enter command: ");
@@ -38,31 +41,25 @@ public class Client {
 
                 story = new UserStory(userid, description, prio);
 
-                try {
-                    storyStorage.addUserStory(story);
-                } catch (UserStoryStorageException e) {
-                    throw new RuntimeException(e);
+                System.out.println(storyStorage.addUserStory(story));
+
                 }
-            }
+
             if (command.equals("task")) {
                 taskid = scanner.nextInt();
                 description = scanner.nextLine();
                 task = new Task(description, taskid);
-                taskList.add(task);
+                System.out.println(taskStorage.addTask(task));
 
             }
             if (command.equals("assign")) {
-                String line = scanner.nextLine().trim();
-                String[] parts = line.split(" ", 2);
-                String adduserstoryid = parts[0];
-                String addtaskid = parts[1];
-                for (Task t : taskList) {
-                    if (t.getId().equals(addtaskid)) {
-                        storyStorage.getUserStory(adduserstoryid).addTask(t);
-                    }
-                }
 
-                taskList.removeIf(t -> t.getId().equals(addtaskid));
+                int adduserstoryid = scanner.nextInt();
+                int addtaskid = scanner.nextInt();
+                Task t = taskStorage.getTasks(addtaskid);
+                if (t != null) {
+                    System.out.println(storyStorage.getUserStory(adduserstoryid).addTask(t));
+                }
 
             }
 
@@ -71,14 +68,13 @@ public class Client {
             }
 
             if (command.equals("tasks")) {
-                for (Task t : taskList) {
-                    System.out.println(t.toString());
-                }
+                System.out.println(taskStorage);
             }
 
             if (command.equals("load")) {
                 try {
                     storyStorage.loadUserStories();
+                //    taskStorage.loadTasks();
                 } catch (UserStoryStorageException e) {
                     throw new RuntimeException(e);
                 }
@@ -86,6 +82,7 @@ public class Client {
             if (command.equals("save")) {
                 try {
                     storyStorage.saveUserStories();
+                //    taskStorage.saveTasks();
                 } catch (UserStoryStorageException e) {
                     throw new RuntimeException(e);
 
@@ -94,11 +91,6 @@ public class Client {
 
 
         }
-
-        System.out.println(description);
-        System.out.println(userid);
-        System.out.println(taskid);
-        System.out.println(prio);
 
         scanner.close();
 

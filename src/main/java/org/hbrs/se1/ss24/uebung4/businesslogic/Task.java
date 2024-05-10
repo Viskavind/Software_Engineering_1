@@ -4,15 +4,15 @@ import java.io.Serializable;
 
 public class Task implements Serializable {
 
-    private final String id;
+    private final int id;
     private final String description;
 
     public Task (String description, int id){
         this.description = description;
-        this.id = "T"+id;
+        this.id = id;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
