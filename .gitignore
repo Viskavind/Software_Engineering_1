@@ -1,3 +1,4 @@
 # Project exclude paths
 /out/
 /.idea/encodings.xml
+/userStories.dat

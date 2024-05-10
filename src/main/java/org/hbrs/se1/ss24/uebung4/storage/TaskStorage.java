@@ -1,21 +1,20 @@
-package org.hbrs.se1.ss24.uebung4.businesslogic;
+package org.hbrs.se1.ss24.uebung4.storage;
+
+import org.hbrs.se1.ss24.uebung4.taskuserstory.Task;
 
 import java.io.*;
 import java.util.ArrayList;
 
-public class TaskStorage implements Serializable {
+public class TaskStorage extends AbstractStorage<Task> {
 
-    private final ArrayList<Task> tasks = new ArrayList<>();
+    public TaskStorage() {
+        super();
+    }
 
-    public TaskStorage() {}
+    //old code
+    /*public int size(){
 
-
-    public int size(){
-        int size = 0;
-        for(Task t : tasks){
-            size++;
-        }
-        return size;
+        return super.size();
     }
 
     public String addTask(Task task) {

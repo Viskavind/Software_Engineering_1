@@ -1,8 +1,11 @@
 package org.hbrs.se1.ss24.uebung4.client;
 
-import org.hbrs.se1.ss24.uebung4.businesslogic.*;
+import org.hbrs.se1.ss24.uebung4.taskuserstory.*;
+import org.hbrs.se1.ss24.uebung4.storage.TaskStorage;
+import org.hbrs.se1.ss24.uebung4.storage.UserStoryException;
+import org.hbrs.se1.ss24.uebung4.storage.UserStoryStorage;
+import org.hbrs.se1.ss24.uebung4.storage.UserStoryStorageException;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Client {
@@ -41,7 +44,7 @@ public class Client {
 
                 story = new UserStory(userid, description, prio);
 
-                System.out.println(storyStorage.addUserStory(story));
+                System.out.println(storyStorage.add(story));
 
                 }
 
@@ -49,16 +52,16 @@ public class Client {
                 taskid = scanner.nextInt();
                 description = scanner.nextLine();
                 task = new Task(description, taskid);
-                System.out.println(taskStorage.addTask(task));
+                System.out.println(taskStorage.add(task));
 
             }
             if (command.equals("assign")) {
 
                 int adduserstoryid = scanner.nextInt();
                 int addtaskid = scanner.nextInt();
-                Task t = taskStorage.getTasks(addtaskid);
+                Task t = taskStorage.get(addtaskid);
                 if (t != null) {
-                    System.out.println(storyStorage.getUserStory(adduserstoryid).addTask(t));
+                    System.out.println(storyStorage.get(adduserstoryid).addTask(t));
                 }
 
             }
@@ -73,7 +76,7 @@ public class Client {
 
             if (command.equals("load")) {
                 try {
-                    storyStorage.loadUserStories();
+                    storyStorage.load("userStories.dat");
                 //    taskStorage.loadTasks();
                 } catch (UserStoryStorageException e) {
                     throw new RuntimeException(e);
@@ -81,8 +84,8 @@ public class Client {
             }
             if (command.equals("save")) {
                 try {
-                    storyStorage.saveUserStories();
-                //    taskStorage.saveTasks();
+                    storyStorage.save("userStories.dat");
+                //  taskStorage.saveTasks();
                 } catch (UserStoryStorageException e) {
                     throw new RuntimeException(e);
 

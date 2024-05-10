@@ -1,24 +1,21 @@
-package org.hbrs.se1.ss24.uebung4.businesslogic;
+package org.hbrs.se1.ss24.uebung4.storage;
+
+import org.hbrs.se1.ss24.uebung4.taskuserstory.UserStory;
 
 import java.io.*;
 import java.util.ArrayList;
 
-public class UserStoryStorage implements Serializable{
-
-    private final ArrayList<UserStory> userStories = new ArrayList<>();
-
+public class UserStoryStorage extends AbstractStorage<UserStory> {
 
     public UserStoryStorage(){
-
+        super();
     }
 
 
-    public int size(){
-        int size = 0;
-        for(UserStory userStory : userStories){
-            size++;
-        }
-        return size;
+
+    //old code
+    /*public int size(){
+        return super.size();
     }
 
     public String addUserStory(UserStory userStory) {
@@ -83,7 +80,8 @@ public class UserStoryStorage implements Serializable{
             fis.close();
             ois.close();
         } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
             throw new UserStoryStorageException("Fehler beim Laden der UserStories",e);
         }
-    }
+    }*/
 }

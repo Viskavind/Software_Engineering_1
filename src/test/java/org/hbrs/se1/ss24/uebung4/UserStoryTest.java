@@ -1,6 +1,8 @@
 package org.hbrs.se1.ss24.uebung4;
 
-import org.hbrs.se1.ss24.uebung4.businesslogic.*;
+import org.hbrs.se1.ss24.uebung4.taskuserstory.*;
+import org.hbrs.se1.ss24.uebung4.storage.TaskStorage;
+import org.hbrs.se1.ss24.uebung4.storage.UserStoryStorage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
