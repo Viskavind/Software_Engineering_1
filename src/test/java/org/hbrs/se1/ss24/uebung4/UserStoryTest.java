@@ -1,10 +1,15 @@
 package org.hbrs.se1.ss24.uebung4;
 
+import org.hbrs.se1.ss24.uebung3.Cardbox.CardboxStorageException;
+import org.hbrs.se1.ss24.uebung4.storage.UserStoryException;
+import org.hbrs.se1.ss24.uebung4.storage.UserStoryStorageException;
 import org.hbrs.se1.ss24.uebung4.taskuserstory.*;
 import org.hbrs.se1.ss24.uebung4.storage.TaskStorage;
 import org.hbrs.se1.ss24.uebung4.storage.UserStoryStorage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.FileNotFoundException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -50,32 +55,64 @@ public class UserStoryTest {
 
     @Test
     public void testUserStoryStorage() {
-        assertEquals("User Story wurde hinzugefügt", userStoryStorage.addUserStory(testStory));
+        assertEquals("Item added", userStoryStorage.add(testStory));
         assertEquals(1, userStoryStorage.size());
-        assertEquals("User Story wurde hinzugefügt", userStoryStorage.addUserStory(testStory2));
+        assertEquals("Item added", userStoryStorage.add(testStory2));
         assertEquals(2, userStoryStorage.size());
-        assertEquals("Die UserStory mit der Id:1 existiert bereits", userStoryStorage.addUserStory(testStory));
+        assertEquals("The item with the Id:1 already exists", userStoryStorage.add(testStory));
         assertEquals(2, userStoryStorage.size());
-        assertNull(userStoryStorage.getUserStory(9090));
-        assertEquals(testStory,userStoryStorage.getUserStory(1));
-        assertEquals(testStory2,userStoryStorage.getUserStory(2));
+        assertNull(userStoryStorage.get(9090));
+        assertEquals(testStory,userStoryStorage.get(1));
+        assertEquals(testStory2,userStoryStorage.get(2));
         assertEquals("UserStory [id=1, description=description, prio=high, tasks=[]]" +
                 "\nUserStory [id=2, description=description, prio=high, tasks=[]]\n", userStoryStorage.toString());
     }
 
     @Test
     public void testTaskStorage() {
-        assertEquals("Task added", taskStorage.addTask(testTask));
+        assertEquals("Item added", taskStorage.add(testTask));
         assertEquals(1, taskStorage.size());
-        assertEquals("Task added", taskStorage.addTask(testTask2));
+        assertEquals("Item added", taskStorage.add(testTask2));
         assertEquals(2, taskStorage.size());
-        assertEquals("Task already exists", taskStorage.addTask(testTask));
+        assertEquals("The item with the Id:1 already exists", taskStorage.add(testTask));
         assertEquals(2, taskStorage.size());
-        assertNull(taskStorage.getTasks(9090));
-        assertEquals(testTask,taskStorage.getTasks(1));
-        assertEquals(testTask2,taskStorage.getTasks(2));
+        assertNull(taskStorage.get(9090));
+        assertEquals(testTask,taskStorage.get(1));
+        assertEquals(testTask2,taskStorage.get(2));
         assertEquals("Task [id=1, description=description]" +
                 "\nTask [id=2, description=description]\n", taskStorage.toString());
+    }
+
+    @Test
+    public void testEmptyStorage(){
+        UserStoryStorage emptyUserStorage = new UserStoryStorage();
+        assertEquals(0,emptyUserStorage.size());
+        assertEquals("", emptyUserStorage.toString());
+    }
+
+    @Test
+    public void testSaveLoad(){
+        UserStoryStorage emptyUserStorage = new UserStoryStorage();
+        assertThrows(UserStoryStorageException.class, () -> emptyUserStorage.load("userStories.dat"));
+
+        emptyUserStorage.add(testStory);
+        emptyUserStorage.add(testStory2);
+        try{
+            emptyUserStorage.save("userStories.dat");
+        }
+        catch (UserStoryStorageException e){
+            fail("exception while saving cardboard");
+        }
+
+        try {
+            emptyUserStorage.load("userStories.dat");
+            assertEquals(2, emptyUserStorage.size());
+            assertEquals(testStory.toString(), emptyUserStorage.get(1).toString());
+            assertEquals(testStory2.toString(), emptyUserStorage.get(2).toString());
+        } catch (UserStoryStorageException e) {
+            fail("Exception while loading CardBox");
+        }
+
     }
 
 }
