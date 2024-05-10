@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 public class UserStory implements Serializable {
 
-    private String id;
-    private String description;
-    private String prio;
-    private ArrayList<Task> tasks = new ArrayList<Task>();
+    private final String id;
+    private final String description;
+    private final String prio;
+    private final ArrayList<Task> tasks = new ArrayList<>();
 
     public UserStory (int id, String description, String prio) {
         this.description = description;
@@ -21,7 +21,7 @@ public class UserStory implements Serializable {
 
     @Override
     public String toString() {
-        return "UserStory [id=" + id + ", description=" + description + ", prio=" + prio + ", tasks=" + tasks.toString() + "]";
+        return "UserStory [id=" + id + ", description=" + description + ", prio=" + prio + ", tasks=" + tasks + "]";
     }
 
     public void addTask(Task task) throws UserStoryException {

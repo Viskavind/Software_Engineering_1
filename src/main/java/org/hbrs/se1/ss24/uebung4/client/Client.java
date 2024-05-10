@@ -12,7 +12,7 @@ public class Client {
         UserStoryStorage storyStorage = new UserStoryStorage();
         UserStory story;
         Task task;
-        ArrayList<Task> taskList = new ArrayList<Task>();
+        ArrayList<Task> taskList = new ArrayList<>();
         String description = "";
         int taskid = 0;
         int userid = 0;
@@ -37,7 +37,12 @@ public class Client {
                 prio = descAndPrio[2].trim();
 
                 story = new UserStory(userid, description, prio);
-                storyStorage.addUserStory(story);
+
+                try {
+                    storyStorage.addUserStory(story);
+                } catch (UserStoryStorageException e) {
+                    throw new RuntimeException(e);
+                }
             }
             if (command.equals("task")) {
                 taskid = scanner.nextInt();

@@ -5,17 +5,19 @@ import java.util.ArrayList;
 
 public class UserStoryStorage implements Serializable{
 
-    private ArrayList<UserStory> userStories = new ArrayList<>();
+    private final ArrayList<UserStory> userStories = new ArrayList<>();
 
     public UserStoryStorage(){
 
     }
 
-    public UserStoryStorage(ArrayList<UserStory> userStories) {
-        this.userStories = userStories;
-    }
 
-    public void addUserStory(UserStory userStory) {
+    public void addUserStory(UserStory userStory) throws UserStoryStorageException{
+        for (UserStory existingUserStory : userStories) {
+            if (existingUserStory.getId().equals(userStory.getId())) {
+                throw new UserStoryStorageException("Das UserStory-Objekt mit der ID " + userStory.getId() + " ist bereits vorhanden");
+            }
+        }
         userStories.add(userStory);
     }
 
@@ -32,11 +34,11 @@ public class UserStoryStorage implements Serializable{
     }
 
     public String toString(){
-        String str = "";
+        StringBuilder str = new StringBuilder();
         for(UserStory userStory : userStories){
-            str = str + "\n" + userStory.toString();
+            str.append("\n").append(userStory.toString());
         }
-        return str;
+        return str.toString();
     }
 
     public void saveUserStories() throws UserStoryStorageException {
