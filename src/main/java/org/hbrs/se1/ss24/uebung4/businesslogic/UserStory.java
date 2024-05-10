@@ -19,6 +19,10 @@ public class UserStory implements Serializable {
 
     public String getId() {return id;}
 
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
+
     @Override
     public String toString() {
         return "UserStory [id=" + id + ", description=" + description + ", prio=" + prio + ", tasks=" + tasks + "]";

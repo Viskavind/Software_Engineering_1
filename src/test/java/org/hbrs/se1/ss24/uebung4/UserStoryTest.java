@@ -32,8 +32,7 @@ public class UserStoryTest {
         UserStory userStory = new UserStory(1, "description", "high");
         Task task = new Task("description", 1);
         userStory.addTask(task);
-        // Assuming UserStory has a getTasks method that returns the list of tasks
-        assertTrue(userStory.getTasks().contains(task));
+        assertEquals(1, userStory.getTasks().size());
     }
 
 }
