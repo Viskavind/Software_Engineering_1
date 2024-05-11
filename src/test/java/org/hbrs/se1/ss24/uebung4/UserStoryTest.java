@@ -1,5 +1,6 @@
 package org.hbrs.se1.ss24.uebung4;
 
+import org.hbrs.se1.ss24.uebung4.client.Client;
 import org.hbrs.se1.ss24.uebung4.storage.UserStoryStorageException;
 import org.hbrs.se1.ss24.uebung4.taskuserstory.*;
 import org.hbrs.se1.ss24.uebung4.storage.TaskStorage;
@@ -116,6 +117,28 @@ public class UserStoryTest {
             fail("Exception while loading CardBox");
         }
 
+    }
+
+    @Test
+    public void testUserStoryFlow(){
+        testStory.addTask(testTask);
+
+        try {
+            userStoryStorage.add(testStory);
+            userStoryStorage.save("userStories.dat");
+        } catch (UserStoryStorageException e) {
+            fail("Exception while saving UserStory");
+        }
+
+
+        try {
+            userStoryStorage.load("userStories.dat");
+        } catch (UserStoryStorageException e){
+            fail("Exception while loading UserStory");
+        }
+
+        UserStory loadedStory = userStoryStorage.get(1);
+        assertEquals(testStory.toString(), loadedStory.toString());
     }
 
 }
