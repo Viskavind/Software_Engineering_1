@@ -2,8 +2,6 @@ package org.hbrs.se1.ss24.uebung4.storage;
 
 import org.hbrs.se1.ss24.uebung4.taskuserstory.UserStory;
 
-import java.io.*;
-import java.util.ArrayList;
 
 public class UserStoryStorage extends AbstractStorage<UserStory> {
 
@@ -25,7 +23,7 @@ public class UserStoryStorage extends AbstractStorage<UserStory> {
             }
         }
         userStories.add(userStory);
-        return "User Story wurde hinzugefügt";
+        return "User Story wurde hinzugefï¿½gt";
     }
 
     public UserStory getUserStory(int id){

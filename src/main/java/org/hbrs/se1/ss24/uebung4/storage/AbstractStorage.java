@@ -58,6 +58,7 @@ public abstract class AbstractStorage<T extends AbstractTaskUserStory> implement
         }
     }
 
+    @SuppressWarnings("unchecked")
     public void load(String filename) throws UserStoryStorageException {
         try {
             FileInputStream fis = new FileInputStream(filename);
@@ -75,7 +76,6 @@ public abstract class AbstractStorage<T extends AbstractTaskUserStory> implement
             fis.close();
             ois.close();
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
             throw new UserStoryStorageException("Error loading the items",e);
         }
     }

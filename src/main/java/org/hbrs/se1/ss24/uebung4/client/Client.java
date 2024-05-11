@@ -2,7 +2,6 @@ package org.hbrs.se1.ss24.uebung4.client;
 
 import org.hbrs.se1.ss24.uebung4.taskuserstory.*;
 import org.hbrs.se1.ss24.uebung4.storage.TaskStorage;
-import org.hbrs.se1.ss24.uebung4.storage.UserStoryException;
 import org.hbrs.se1.ss24.uebung4.storage.UserStoryStorage;
 import org.hbrs.se1.ss24.uebung4.storage.UserStoryStorageException;
 
@@ -10,16 +9,16 @@ import java.util.Scanner;
 
 public class Client {
 
-    public static void main(String[] args) throws UserStoryException {
+    public static void main(String[] args) {
 
         UserStoryStorage storyStorage = new UserStoryStorage();
         TaskStorage taskStorage = new TaskStorage();
         UserStory story;
         Task task;
-        String description = "";
-        int taskid = 0;
-        int userid = 0;
-        String prio = "";
+        String description;
+        int taskid;
+        int userid;
+        String prio;
 
 
         Scanner scanner = new Scanner(System.in);

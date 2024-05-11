@@ -1,7 +1,5 @@
 package org.hbrs.se1.ss24.uebung4;
 
-import org.hbrs.se1.ss24.uebung3.Cardbox.CardboxStorageException;
-import org.hbrs.se1.ss24.uebung4.storage.UserStoryException;
 import org.hbrs.se1.ss24.uebung4.storage.UserStoryStorageException;
 import org.hbrs.se1.ss24.uebung4.taskuserstory.*;
 import org.hbrs.se1.ss24.uebung4.storage.TaskStorage;
@@ -9,7 +7,6 @@ import org.hbrs.se1.ss24.uebung4.storage.UserStoryStorage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.FileNotFoundException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -64,8 +61,11 @@ public class UserStoryTest {
         assertNull(userStoryStorage.get(9090));
         assertEquals(testStory,userStoryStorage.get(1));
         assertEquals(testStory2,userStoryStorage.get(2));
-        assertEquals("UserStory [id=1, description=description, prio=high, tasks=[]]" +
-                "\nUserStory [id=2, description=description, prio=high, tasks=[]]\n", userStoryStorage.toString());
+        assertEquals("""
+                UserStory [id=1, description=description, prio=high, tasks=[]]\
+
+                UserStory [id=2, description=description, prio=high, tasks=[]]
+                """, userStoryStorage.toString());
     }
 
     @Test
@@ -79,8 +79,11 @@ public class UserStoryTest {
         assertNull(taskStorage.get(9090));
         assertEquals(testTask,taskStorage.get(1));
         assertEquals(testTask2,taskStorage.get(2));
-        assertEquals("Task [id=1, description=description]" +
-                "\nTask [id=2, description=description]\n", taskStorage.toString());
+        assertEquals("""
+                Task [id=1, description=description]\
+
+                Task [id=2, description=description]
+                """, taskStorage.toString());
     }
 
     @Test
