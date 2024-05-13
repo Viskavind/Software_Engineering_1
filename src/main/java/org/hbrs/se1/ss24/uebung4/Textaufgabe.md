@@ -2,7 +2,7 @@
 
 - Funktionale Anforderung: Ein User sollte in der Lage sein, User Stories und Tasks zu erstellen und zu speichern.
 - Nicht-funktionale Anforderung: Das System soll drei Wochen ohne Neustart im Dauerbetrieb laufen. 
-- technische Anforderung: Das System soll in Java programmiert werden.
+- technische Anforderung: Zur Nutzung der Software muss die Java Runtime Environment auf dem System installiert sein.
 
 ## 1.2.
 
@@ -11,7 +11,7 @@
 | U1 | + | + | - | + | + | + |
 | U2 | + | + | + | + | + | + |
 | U3 | + | - | + | + | - | + |
-| U4 | + | - | + | - | - | + |
+| U4 | + | + | + | - | - | - |
 | U5 | + | + | + | + | + | + |
 
 ## 1.3.

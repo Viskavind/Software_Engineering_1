@@ -97,6 +97,8 @@ public class UserStoryTest {
     @Test
     public void testSaveLoad(){
         UserStoryStorage emptyUserStorage = new UserStoryStorage();
+
+        //userStories.dat needs to be deleted first!
         assertThrows(UserStoryStorageException.class, () -> emptyUserStorage.load("userStories.dat"));
 
         emptyUserStorage.add(testStory);
@@ -121,10 +123,14 @@ public class UserStoryTest {
 
     @Test
     public void testUserStoryFlow(){
-        testStory.addTask(testTask);
+        UserStory testStory3 = new UserStory(62, "EndToEnd description", "low");
+        Task testTask3 = new Task("EndToEnd task", 15);
+        Task testTask4 = new Task("EndToEnd task2", 27);
+        testStory3.addTask(testTask3);
+        testStory3.addTask(testTask4);
 
         try {
-            userStoryStorage.add(testStory);
+            userStoryStorage.add(testStory3);
             userStoryStorage.save("userStories.dat");
         } catch (UserStoryStorageException e) {
             fail("Exception while saving UserStory");
@@ -137,8 +143,8 @@ public class UserStoryTest {
             fail("Exception while loading UserStory");
         }
 
-        UserStory loadedStory = userStoryStorage.get(1);
-        assertEquals(testStory.toString(), loadedStory.toString());
+        UserStory loadedStory = userStoryStorage.get(62);
+        assertEquals(testStory3.toString(), loadedStory.toString());
     }
 
 }
