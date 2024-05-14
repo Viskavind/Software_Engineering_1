@@ -1,6 +1,5 @@
 package org.hbrs.se1.ss24.uebung4;
 
-import org.hbrs.se1.ss24.uebung4.client.Client;
 import org.hbrs.se1.ss24.uebung4.storage.UserStoryStorageException;
 import org.hbrs.se1.ss24.uebung4.taskuserstory.*;
 import org.hbrs.se1.ss24.uebung4.storage.TaskStorage;
@@ -8,6 +7,8 @@ import org.hbrs.se1.ss24.uebung4.storage.UserStoryStorage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+
+import java.io.File;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -97,8 +98,10 @@ public class UserStoryTest {
     @Test
     public void testSaveLoad(){
         UserStoryStorage emptyUserStorage = new UserStoryStorage();
-
-        //userStories.dat needs to be deleted first!
+        File file = new File("userstories.dat");
+        if (file.exists()){
+            file.delete();
+        }
         assertThrows(UserStoryStorageException.class, () -> emptyUserStorage.load("userStories.dat"));
 
         emptyUserStorage.add(testStory);
@@ -129,6 +132,10 @@ public class UserStoryTest {
         testStory3.addTask(testTask3);
         testStory3.addTask(testTask4);
 
+        assertEquals(2, testStory3.getTasks().size());
+        assertTrue(testStory3.getTasks().contains(testTask3));
+        assertTrue(testStory3.getTasks().contains(testTask4));
+
         try {
             userStoryStorage.add(testStory3);
             userStoryStorage.save("userStories.dat");
@@ -144,6 +151,11 @@ public class UserStoryTest {
         }
 
         UserStory loadedStory = userStoryStorage.get(62);
+        assertEquals(testStory3.getDescription(), loadedStory.getDescription());
+        assertEquals(testStory3.getPrio(), loadedStory.getPrio());
+        assertEquals(testStory3.getTasks().size(), loadedStory.getTasks().size());
+        assertTrue(loadedStory.getTasks().contains(testTask3));
+        assertTrue(loadedStory.getTasks().contains(testTask4));
         assertEquals(testStory3.toString(), loadedStory.toString());
     }
 

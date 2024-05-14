@@ -19,6 +19,10 @@ public class UserStory extends AbstractTaskUserStory {
         return tasks;
     }
 
+    public String getPrio() {
+        return this.prio;
+    }
+
     @Override
     public String toString() {
         return "UserStory [id=" + super.getId() + ", description=" + super.getDescription() + ", prio=" + prio + ", tasks=" + tasks + "]";
